@@ -4,6 +4,7 @@ import { Container, Row, Navbar} from 'react-bootstrap';
 import HomeComponent from './components/home/home';
 import ManagerComponent from './components/manager';
 import DeviceComponent from './components/device';
+import ManagerForm from './components/manager-form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -37,6 +38,7 @@ class App extends React.Component {
                 <Route path='/' exact render={(props=> <HomeComponent {...props} />)}></Route>
                 <Route path='/manager' exact render={(props=> <ManagerComponent {...props} />)}></Route>
                 <Route path='/device' exact render={(props=> <DeviceComponent {...props} />)}></Route>
+                <Route path='/manager/form' exact render={(props=> <ManagerForm {...props} />)}></Route>
               </Switch>
             </Router>
           </Row>

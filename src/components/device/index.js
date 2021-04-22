@@ -54,7 +54,7 @@ import {
         <Row className="mt-4">
           <Col className="mb-4" sm={12} md={12} lg={12}>
             <Link to="/">
-              <Button variant="primary" type="button" onClick={handerClick}>
+              <Button variant="primary" type="button">
                   Volver
               </Button>
             </Link>
