@@ -28,7 +28,7 @@ class App extends React.Component {
               height="30"
               className="d-inline-block align-top"
             />{' '}
-            Cocktail Online
+            Clean Hands
           </Navbar.Brand>
         </Navbar>
         <Container>
