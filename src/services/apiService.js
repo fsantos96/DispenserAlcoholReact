@@ -1,5 +1,26 @@
 //Codigo para comunicarse con la api
 const request = require('request-promise');
+const baseApi = "http://localhost:3500/";
+
+export function setDeviceAlertsTimes(ackAlertTime, doneAlertTime) {
+    var options = {
+        method: 'POST',
+        uri: baseApi + "device/setAlarms",
+        body: {
+            timeAck: ackAlertTime,
+            timeCharge: doneAlertTime
+        },
+        json: true // Automatically stringifies the body to JSON
+    };
+    console.log(options)
+    return new Promise((resolve, reject) => {
+        request(options).then(data =>{
+            resolve(data);
+        }).catch(error => {
+            reject();
+        })
+    });
+}
 
 // export function getDeviceData() {
 //     return new Promise((resolve, reject) => {
@@ -9,12 +30,4 @@ const request = require('request-promise');
 //             reject();
 //         })
 //     });
-// }
-// function sentRequest(method, params) {
-//     var options ={
-//         url:"http://localhost:3500/device",
-//         json:true
-//     }
-
-//     return request(options);
 // }

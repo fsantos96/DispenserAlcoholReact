@@ -7,7 +7,8 @@ import {
     Button,
     Form,
     Row,
-    Col
+    Col,
+    Alert,
   } from 'react-bootstrap';
   import 'bootstrap/dist/css/bootstrap.min.css';
   import './index.css';
@@ -19,6 +20,7 @@ import {
     var deviceId = props.location.search.split("=");
     deviceId = deviceId.length > 1 ? deviceId[1] : null;
     const [showErrorAckInput, setShowErrorAckInput] = useState(false);
+    const [alert, setAlert] = useState(null);
     const [showErrorDoneNotificationInput, setShowErrorDoneNotificationInput] = useState(false);
     const [inputACKValue, setInputACKValue] = useState(20);
     const [inputDoneNotificationValue, setInputDoneNotificationValue] = useState(20);
@@ -28,7 +30,17 @@ import {
         return;
       }
 
-      //Codigo para enviar a la api
+      apiService.setDeviceAlertsTimes(inputACKValue, inputDoneNotificationValue).then(() => {
+        setAlert({
+          type: "success",
+          message: "Los datos se guardaron con exito!."
+        })
+      }).catch((error) => {
+        setAlert({
+          type: "danger",
+          message: "Ocurrio un error al guardar los datos!."
+        })
+      })
     }
 
     const handleValueChange = (event) => {
@@ -49,8 +61,18 @@ import {
         }
       }
     }
+
+    if(alert) {
+      setTimeout(() => {
+        setAlert(null);
+      }, 4000);
+    }
     return (
       <Container>
+        { alert && <Alert className="mt-4" variant={alert.type}>
+            {alert.message}
+          </Alert>
+        }
         <Row className="mt-4">
           <Col className="mb-4" sm={12} md={12} lg={12}>
             <Link to="/">
