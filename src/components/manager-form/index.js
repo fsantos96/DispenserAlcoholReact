@@ -11,21 +11,28 @@ import {
   } from 'react-bootstrap';
   import 'bootstrap/dist/css/bootstrap.min.css';
   import * as apiService from '../../services/apiService';
+  import { Redirect } from 'react-router';
+
   const React = require('react');
   const { useEffect, useState} = require('react');
 
   const ManagerFormComponent = (props) => {
-    var managerEmail = props.location.search.split("=");
-    managerEmail = managerEmail.length > 1 ? managerEmail[1] : '';
+    var managerId = props.location.search.split("=");
+    managerId = managerId.length > 1 ? managerId[1] : '';
+    const [managerData, setManagerData] = useState(null);
     const [showErrorInput, setShowErrorInput] = useState(false);
-    const [managetInput, setManagetInput] = useState(managerEmail);
-    const titleForm = managerEmail ? "Editar Mail" : "Agregar Mail";
+    const [managetInput, setManagetInput] = useState('');
+    const titleForm = managerId ? "Editar Mail" : "Agregar Mail";
     const handerClick = () => {
       if(showErrorInput) {
         return;
       }
 
-      //Codigo para enviar a la api
+      apiService.createNewManager(managetInput, managerId).then(() => {
+        window.location.href = "/manager"
+      }).catch((error) => {
+        console.log("error");
+      })
     }
 
     const handleValueChange = (event) => {
@@ -40,6 +47,16 @@ import {
         }
      
     }
+
+    useEffect(() => {
+      apiService.getManagerList(managerId).then((data) => {
+        if(data.manager && managerId) {
+          console.log(data)
+          setManagerData(data.manager);
+          setManagetInput(data.manager.email)
+        }
+      })
+    }, [])
 
     return (
       <Container>

@@ -12,7 +12,60 @@ export function setDeviceAlertsTimes(ackAlertTime, doneAlertTime) {
         },
         json: true // Automatically stringifies the body to JSON
     };
-    console.log(options)
+
+    return new Promise((resolve, reject) => {
+        request(options).then(data =>{
+            resolve(data);
+        }).catch(error => {
+            reject();
+        })
+    });
+}
+
+export function createNewManager(emailManager, managerid) {
+    var options = {
+        method: 'POST',
+        uri: baseApi + "manager",
+        body: {
+            email: emailManager,
+            id: managerid
+        },
+        json: true // Automatically stringifies the body to JSON
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(data =>{
+            resolve(data);
+        }).catch(error => {
+            reject();
+        })
+    });
+}
+
+export function deleteManager(managerid) {
+    var options = {
+        method: 'DELETE',
+        uri: baseApi + "manager?id=" + managerid,
+        json: true // Automatically stringifies the body to JSON
+    };
+
+    return new Promise((resolve, reject) => {
+        request(options).then(data =>{
+            resolve(data);
+        }).catch(error => {
+            reject();
+        })
+    });
+}
+
+export function getManagerList(managerId) {
+    var param = managerId ? "?id=" + managerId : "";
+    var options = {
+        method: 'GET',
+        uri: baseApi + "manager" + param,
+        json: true // Automatically stringifies the body to JSON
+    };
+
     return new Promise((resolve, reject) => {
         request(options).then(data =>{
             resolve(data);

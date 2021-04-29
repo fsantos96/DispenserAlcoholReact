@@ -14,11 +14,9 @@ import {
   import './index.css';
   import * as apiService from '../../services/apiService';
   const React = require('react');
-  const { useEffect, useState} = require('react');
+  const { useState} = require('react');
 
   const DeviceComponent = (props) => {
-    var deviceId = props.location.search.split("=");
-    deviceId = deviceId.length > 1 ? deviceId[1] : null;
     const [showErrorAckInput, setShowErrorAckInput] = useState(false);
     const [alert, setAlert] = useState(null);
     const [showErrorDoneNotificationInput, setShowErrorDoneNotificationInput] = useState(false);

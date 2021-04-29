@@ -10,13 +10,9 @@ import {
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
-import * as apiService from '../../services/apiService';
 const React = require('react');
 
 const HomeComponent = (props) => {
-  var deviceId = props.location.search.split("=");
-  deviceId = deviceId.length > 1 ? deviceId[1] : null;
-
   return (
 
   <Container>
